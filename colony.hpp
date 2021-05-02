@@ -13,7 +13,7 @@ protected:
     Colony(const string name, const char species, int population) : _name(name), _species(species), _population(population) {};
 public:
     int getPopulation() const { return _population; }
-    virtual void reproduction(int n) = 0;
+    virtual void reproduction(int turn) = 0;
     virtual void leave() = 0;
 };
 
@@ -56,15 +56,42 @@ private:
     int attackedValue() const override { return 4; }
 public:
     Lemming(const string name, const char species, int population) : Prey(name, species, population) {};
-    /*void attacked() override {
-
-    }*/
+    void reproduction(int turn) override {
+        if (turn % 2 == 0)
+            _population *= 2;
+    }
+    void leave() override {
+        if (_population > 200)
+            _population = 30;
+    }
 };
 
 class Rabbit : public Prey {
-
+private:
+    int attackedValue() const override { return 2; }
+public:
+    Rabbit(const string name, const char species, int population) : Prey(name, species, population) {};
+    void reproduction(int turn) override {
+        if (turn % 2 == 0)
+            _population *= 1.5;
+    }
+    void leave() override {
+        if (_population > 100)
+            _population = 20;
+    }
 };
 
 class GroundSquirrel : public Prey {
-
+private:
+    int attackedValue() const override { return 2; }
+public:
+    GroundSquirrel(const string name, const char species, int population) : Prey(name, species, population) {};
+    void reproduction(int turn) override {
+        if (turn % 4 == 0)
+            _population *= 2;
+    }
+    void leave() override {
+        if (_population > 200)
+            _population = 40;
+    }
 };
