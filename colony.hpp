@@ -22,21 +22,36 @@ public:
 class Predator : public Colony {
 protected:
     Predator(const string name, const char species, int population) : Colony(name, species, population) {};
+    void leave() override {
+        _population -= _population / 4;
+    }
 };
 
 class SnowOwl : public Predator {
 public:
     SnowOwl(const string name, const char species, int population) : Predator(name, species, population) {};
+    void reproduction(int k) override {
+        if (k % 8 == 0)
+            _population += _population / 4;
+    }
 };
 
 class ArcticFox : public Predator {
 public:
     ArcticFox(const string name, const char species, int population) : Predator(name, species, population) {};
+    void reproduction(int k) override {
+        if (k % 8 == 0)
+            _population += (_population / 4) * 3;
+    }
 };
 
 class Wolf : public Predator {
 public:
     Wolf(const string name, const char species, int population) : Predator(name, species, population) {};
+    void reproduction(int k) override {
+        if (k % 8 == 0)
+            _population += (_population / 4) * 2;
+    }
 };
 
 // PREY
