@@ -18,12 +18,12 @@ A program egy szövegfájlból olvassa be a kolóniák adatait! Az első sorban 
 
 A következő sorok tartalmazzák a kolóniák adatait szóközökkel elválasztva: a becenevüket (szóközök nélküli sztring), a fajukat (amit egy karakter azonosít: h - hóbagoly, s – sarki róka, f – farkas, l – lemming, n – nyúl, u - ürge), és a kezdeti egyedszámukat.
 
-A program kérje be a fájl nevét, majd jelenítse is meg a tartalmát. (Feltehetjük, hogy a fájl formátuma helyes.) Egy lehetséges bemenet:
+A program kérje be a fájl nevét, majd jelenítse is meg a tartalmát. (Feltehetjük, hogy a fájl formátuma helyes.) <b>Egy lehetséges bemenet</b>:
 
-`4 2
-kicsik l 86
-picik l 90
-szaporak n 26
-szorgosak u 12
-ehesek f 12
-tollasak h 6`
+`4 2`  
+`kicsik l 86`  
+`picik l 90`  
+`szaporak n 26`  
+`szorgosak u 12`  
+`ehesek f 12`  
+`tollasak h 6`  
