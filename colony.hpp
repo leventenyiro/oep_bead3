@@ -12,8 +12,10 @@ protected:
 
     Colony(const string name, const char species, int population) : _name(name), _species(species), _population(population) {};
 public:
+    string getName() const { return _name; }
+    char getSpecies() const { return _species; }
     int getPopulation() const { return _population; }
-    virtual void reproduction(int turn) = 0;
+    virtual void reproduction(int round) = 0;
     virtual void leave() = 0;
 };
 
@@ -22,7 +24,8 @@ public:
 class Predator : public Colony {
 protected:
     Predator(const string name, const char species, int population) : Colony(name, species, population) {};
-    void leave() override {
+public:
+    void leave() {
         _population -= _population / 4;
     }
 };
@@ -71,8 +74,8 @@ private:
     int attackedValue() const override { return 4; }
 public:
     Lemming(const string name, const char species, int population) : Prey(name, species, population) {};
-    void reproduction(int turn) override {
-        if (turn % 2 == 0)
+    void reproduction(int round) override {
+        if (round % 2 == 0)
             _population *= 2;
     }
     void leave() override {
@@ -86,8 +89,8 @@ private:
     int attackedValue() const override { return 2; }
 public:
     Rabbit(const string name, const char species, int population) : Prey(name, species, population) {};
-    void reproduction(int turn) override {
-        if (turn % 2 == 0)
+    void reproduction(int round) override {
+        if (round % 2 == 0)
             _population *= 1.5;
     }
     void leave() override {
@@ -101,8 +104,8 @@ private:
     int attackedValue() const override { return 2; }
 public:
     GroundSquirrel(const string name, const char species, int population) : Prey(name, species, population) {};
-    void reproduction(int turn) override {
-        if (turn % 4 == 0)
+    void reproduction(int round) override {
+        if (round % 4 == 0)
             _population *= 2;
     }
     void leave() override {
