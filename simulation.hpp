@@ -84,8 +84,9 @@ void Simulation::run(bool printToConsole) {
     else {
         srand((unsigned int)time(NULL));
         int countStartPreys = sumPreys();
-        unsigned int round = 1;
+        unsigned int round = 0;
         while (!preys.empty() && sumPreys() < countStartPreys * 4) {
+            round++;
             int randomPrey;
             for (unsigned int i = 0; i < predators.size() && !preys.empty(); i++) {
                 randomPrey = rand() % preys.size();
@@ -108,8 +109,6 @@ void Simulation::run(bool printToConsole) {
 
             if (printToConsole)
                 printRound(round);
-
-            round++;
         }
 
         if (predators.empty())

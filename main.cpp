@@ -3,7 +3,7 @@
 using namespace std;
 
 int main() {
-    Simulation test = Simulation("input.txt");
+    Simulation test = Simulation("input3.txt");
     test.run(true);
 
     return 0;

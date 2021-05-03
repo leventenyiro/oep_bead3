@@ -11,6 +11,7 @@ protected:
     int _population;
 
     Colony(const string name, const char species, int population) : _name(name), _species(species), _population(population) {};
+    ~Colony();
 public:
     string getName() const { return _name; }
     char getSpecies() const { return _species; }
@@ -26,7 +27,10 @@ protected:
     Predator(const string name, const char species, int population) : Colony(name, species, population) {};
 public:
     void leave() {
-        _population -= _population / 4;
+        for (int i = 0; i < _population; i++) {
+            if (i % 4 == 0)
+                _population--;
+        }
     }
 };
 
