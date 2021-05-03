@@ -11,7 +11,7 @@ protected:
     int _population;
 
     Colony(const string name, const char species, int population) : _name(name), _species(species), _population(population) {};
-    ~Colony();
+    ~Colony() {};
 public:
     string getName() const { return _name; }
     char getSpecies() const { return _species; }
