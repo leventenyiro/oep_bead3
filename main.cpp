@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <ctime>
 #include "colony.hpp"
 
 using namespace std;
@@ -15,8 +16,6 @@ void create(const string& filename, vector<Prey*>& preys, vector<Predator*>& pre
 
     unsigned int countPrey, countPredator;
     file >> countPrey >> countPredator;
-    //preys.resize(countPrey);
-    //predators.resize(countPredator);
     for (unsigned int i = 0; i < countPrey; i++) {
         string name;
         char species;
@@ -75,60 +74,42 @@ void printRound(unsigned int round, vector<Prey*>& preys, vector<Predator*>& pre
     }
 }
 
-// run
 void run(bool printToConsole, vector<Prey*>& preys, vector<Predator*>& predators) {
     if (preys.empty())
         cout << "There are not any prey colonies.";
     else if (predators.empty())
         cout << "There are not any predator colonies.";
     else {
+        srand((unsigned int)time(NULL));
         int countStartPreys = sumPreys(preys);
         unsigned int round = 1;
         while (!preys.empty() && sumPreys(preys) < countStartPreys * 4) {
             int randomPrey;
-            /*for (Predator* p : predators) {
-                randomPrey = rand() % preys.size();
-                preys[randomPrey]->attacked(*p);
-                // ha nincs annyi egyed, amennyivel fogyna a zsákmányok száma
-                // akkor fogy a ragadozók száma
-                if (preys[randomPrey]->getPopulation() < 0) {
-                    p->leave();
-                    delete preys[randomPrey];
-                    preys.erase(preys.begin() + randomPrey); // töröljük a zsákmányállatot
-                    if (p->getPopulation() <= 0) {
-                        delete p;
-                    }
-                }
-            }*/
-            for (unsigned int i = 0; i < predators.size(); i++) {
+            for (unsigned int i = 0; i < predators.size() && !preys.empty(); i++) {
                 randomPrey = rand() % preys.size();
                 preys[randomPrey]->attacked(*predators[i]);
-                // ha nincs annyi egyed, amennyivel fogyna a zsákmányok száma
-                // akkor fogy a ragadozók száma
                 if (preys[randomPrey]->getPopulation() < 0) {
                     predators[i]->leave();
-                    preys.erase(preys.begin() + randomPrey); // töröljük a zsákmányállatot
+                    preys.erase(preys.begin() + randomPrey);
                     if (predators[i]->getPopulation() <= 0)
                         predators.erase(predators.begin() + i);
                 }
             }
 
-            // reproduction
             for (Prey *p : preys) {
                 p->reproduction(round);
+                p->leave();
             }
             for (Predator *p : predators) {
                 p->reproduction(round);
             }
 
-            // print
             if (printToConsole)
                 printRound(round, preys, predators);
 
             round++;
         }
 
-        // end
         if (predators.empty())
             cout << "Predators are dead." << endl;
         if (preys.empty())
