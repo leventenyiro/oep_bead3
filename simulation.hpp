@@ -83,9 +83,9 @@ void Simulation::run(bool printToConsole) {
         cout << "There are not any predator colonies.";
     else {
         srand((unsigned int)time(NULL));
-        int countStartPreys = sumPreys(preys);
+        int countStartPreys = sumPreys();
         unsigned int round = 1;
-        while (!preys.empty() && sumPreys(preys) < countStartPreys * 4) {
+        while (!preys.empty() && sumPreys() < countStartPreys * 4) {
             int randomPrey;
             for (unsigned int i = 0; i < predators.size() && !preys.empty(); i++) {
                 randomPrey = rand() % preys.size();
@@ -107,7 +107,7 @@ void Simulation::run(bool printToConsole) {
             }
 
             if (printToConsole)
-                printRound(round, preys, predators);
+                printRound(round);
 
             round++;
         }
