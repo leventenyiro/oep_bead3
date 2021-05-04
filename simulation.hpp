@@ -14,7 +14,7 @@ private:
     vector<Prey*> preys;
     vector<Predator*> predators;
     int sumPreys();
-    void printRound(unsigned round);
+    void printRound(int round);
 public:
     Simulation(string filename);
     void run(bool printToConsole);
@@ -122,7 +122,7 @@ void Simulation::run(bool printToConsole) {
     }
 }
 
-void Simulation::printRound(unsigned int round) {
+void Simulation::printRound(int round) {
     cout << round << ". ROUND" << endl;
     for (Prey* p : preys) {
         cout << "\t" << p->getName() << " " << p->getSpecies() << " " << p->getPopulation() << endl;

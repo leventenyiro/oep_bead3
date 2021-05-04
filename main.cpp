@@ -116,7 +116,6 @@ TEST_CASE("leave", "1 predator, 3 preys") {
     r.leave();
     CHECK(r.getPopulation() == 20);
 
-    
     GroundSquirrel g = GroundSquirrel("szorgosak", 'u', 200);
     g.leave();
     CHECK(g.getPopulation() == 200);

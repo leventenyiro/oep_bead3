@@ -26,7 +26,7 @@ class Predator : public Colony {
 protected:
     Predator(const string name, const char species, int population) : Colony(name, species, population) {};
 public:
-    void leave() {
+    void leave() override {
         for (int i = 0; i < _population; i++) {
             if (i % 4 == 0)
                 _population--;
@@ -68,7 +68,7 @@ protected:
     Prey(const string name, const char species, int population) : Colony(name, species, population) {};
     virtual int attackedValue() const = 0;
 public:
-    virtual void attacked(Predator& p) {
+    void attacked(Predator& p) {
         _population -= attackedValue() * p.getPopulation();
     }
 };
