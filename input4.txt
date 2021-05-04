@@ -1,0 +1,3 @@
+1 1
+kicsik l 10000
+tollasak h 2

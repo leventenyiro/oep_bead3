@@ -18,6 +18,8 @@ private:
 public:
     Simulation(string filename);
     void run(bool printToConsole);
+    vector<Prey*> getPreys() { return preys; }
+    vector<Predator*> getPredators() { return predators; };
     ~Simulation();
 };
 
